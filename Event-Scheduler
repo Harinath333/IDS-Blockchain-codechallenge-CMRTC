@@ -1,0 +1,35 @@
+def to_minutes(start_hour, start_minute, end_hour, end_minute):
+    return start_hour * 60 + start_minute, end_hour * 60 + end_minute
+
+def check_conflict(event1, event2):
+    start1, end1 = to_minutes(*event1[1:5])
+    start2, end2 = to_minutes(*event2[1:5])
+    return start1 < end2 and start2 < end1
+
+def main():
+    events = []
+    n = int(input("How many events? "))
+
+    for _ in range(n):
+        desc = input("Event description: ")
+        start_hour, start_minute = map(int, input("Start time (hour minute): ").split())
+        end_hour, end_minute = map(int, input("End time (hour minute): ").split())
+        events.append((desc, start_hour, start_minute, end_hour, end_minute))
+
+    events.sort(key=lambda x: to_minutes(x[1], x[2], x[3], x[4])[0])
+
+    print("\nSorted Schedule:")
+    for e in events:
+        print(f"{e[0]} from {e[1]:02}:{e[2]:02} to {e[3]:02}:{e[4]:02}")
+
+    conflicts = [(e1[0], e2[0]) for i, e1 in enumerate(events) for j, e2 in enumerate(events) if i < j and check_conflict(e1, e2)]
+    
+    if conflicts:
+        print("\nConflicting Events:")
+        for conflict in conflicts:
+            print(f"Conflict between \"{conflict[0]}\" and \"{conflict[1]}\"")
+    else:
+        print("\nNo conflicts detected!")
+
+main()
+
