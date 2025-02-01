@@ -1,7 +1,7 @@
 # IDS-Blockchain-codechallenge-CMRTC
 
 
-# IDS Fungible Token Challenge
+# Fungible Token Challenge
 
 This repository contains a simple implementation of a fungible token created using Solidity and deployed on a local Ethereum network. The token supports basic functionality, such as transferring tokens between addresses. The project is designed to demonstrate the process of creating, compiling, deploying, and interacting with a smart contract.
 
